@@ -1,9 +1,9 @@
 cc = clang++
-link = -std=c++11 -lGL -ldl -lglfw
-config = -std=c++11
+link = -lGL -ldl -lglfw
+config = -g -std=c++11
 
 game : build/main.o build/glch.o build/glad.o build/shader.o build/globject.o
-	$(cc) $(link) build/glad.o build/shader.o build/glch.o build/main.o build/globject.o -o game
+	$(cc) $(config) $(link) build/glad.o build/shader.o build/glch.o build/main.o build/globject.o -o game
 
 build/main.o : src/main.cpp include/glch.h
 	$(cc) $(config) -c src/main.cpp -o build/main.o
