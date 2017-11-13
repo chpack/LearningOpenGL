@@ -6,8 +6,7 @@ int main()
 {
     Glch glch;
     glch.addShader("runtime/glsl/vs.glsl","runtime/glsl/fs.glsl");
-    glch.addVBO((char *)"./runtime/data/point/tra.pnt");
-    glch.addVAO(0);
+    glch.add((char *)"./runtime/data/point/tra.pnt");
 
     int vcl = glGetUniformLocation(glch.id(), "col");
 

@@ -28,7 +28,7 @@ class Glch
 
         // Create OpenGL object
         int addVBO( char *);
-        int addVAO( int );
+        void add( char * );
 
         // Create OpenGL object
         void bindVBO(int , bool);
@@ -45,8 +45,7 @@ class Glch
         std::vector<Shader>  _shader;
         
         // The opengl object
-        std::vector<glVBO> _vboVec;
-        std::vector<glVAO> _vaoVec;
+        glVAO vao;
         
         // Width and heighe of window
         int _width, _height;
