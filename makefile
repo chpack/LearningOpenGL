@@ -28,3 +28,7 @@ clean:
 .PHONY : run
 run: game
 	./game
+
+.PHONY : debug
+debug : game
+	gdb -tui game

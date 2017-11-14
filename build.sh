@@ -1,4 +1,8 @@
 #!/bin/bash
-make && make run
+if [ "$1" == 'd' ]; then
+    make debug 
+else
+    make run
+fi
 
 
