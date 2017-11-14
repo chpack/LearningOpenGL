@@ -4,7 +4,7 @@ void processInput(GLFWwindow * window);
 
 int main()
 {
-    Glch glch;
+    Glch glch( 400, 300, (char *) "First", 1);
     glch.addShader("runtime/glsl/vs.glsl","runtime/glsl/fs.glsl");
     glch.add((char *)"./runtime/data/point/tra.pnt");
 
@@ -25,7 +25,7 @@ int main()
         b += ab * 0.005;
 
         glch.use();
-        glUniform3f( vcl, g,b,r);
+        glUniform3f( vcl, 1 - r, 1 - g,  1 - b);
         glch.bindVAO(0, true);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 

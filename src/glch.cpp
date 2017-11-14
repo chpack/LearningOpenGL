@@ -6,7 +6,7 @@
 
 void fb_size_callback(GLFWwindow * window, int width, int height);
 
-Glch::Glch( int width, int height, char * title):vao()
+Glch::Glch( int width, int height, char * title, int objectNum):vao(objectNum)
 {
     _width = width;
     _height = height;
@@ -84,7 +84,7 @@ void Glch::add( char * dataPath)
 // Bind OpenGL object
 void Glch::bindVAO(int index, bool flag)
 {
-    vao.bind(flag);
+    vao.bind(index,flag);
 }
 
 

@@ -12,7 +12,7 @@ class Glch
 {
     public:
         // Init for glfw and create a window 
-        Glch( int width = 1280, int height=720, char * title = (char *) "text");
+        Glch( int width = 1280, int height=720, char * title = (char *) "text", int objectNum = 1);
 
         // Dectroy anything
         ~Glch();
@@ -24,14 +24,12 @@ class Glch
         int addShader(const char * vsp, const char *fsp);
 
         // Use the shader program
-        void use(int n = 0);
+        void use(int index = 0);
 
         // Create OpenGL object
-        int addVBO( char *);
         void add( char * );
 
-        // Create OpenGL object
-        void bindVBO(int , bool);
+        // Create OpenGL object 
         void bindVAO(int , bool);
         
         // Return the id of shader program

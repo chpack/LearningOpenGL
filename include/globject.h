@@ -8,20 +8,24 @@
 class glVAO
 {
     public:
-        glVAO();
+        glVAO(int);
         ~glVAO();
         void add(char *);
-        void bind(bool flag = true);
+        void bind(int, bool flag = true);
     protected:
-        unsigned int _vao, _vbo;
-        unsigned int _buffType,
-            _drawType,
-            _pos,
-            _part,
-            _dataType,
-            _norm,
-            _step,
-            _num;
+        unsigned int 
+          * _vao, 
+          * _vbo,
+          * _buffT,
+          * _drawT,
+          * _pos,
+          * _part,
+          * _dataT,
+          * _norm,
+          * _step,
+          * _number,
+            index,
+            max;
         float * data;
 };
 #endif
