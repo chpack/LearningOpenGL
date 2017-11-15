@@ -26,6 +26,14 @@ class glVAO
           * _number,
             index,
             max;
-        float * data;
+        float ** data;
+};
+
+struct object
+{
+    object * next;
+    void (* draw)();
+    int vaoIndex;
+    int prgIndex;
 };
 #endif

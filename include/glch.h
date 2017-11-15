@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <vector>
+#include <thread>
 #include "shader.h"
 #include "globject.h"
 
@@ -21,20 +22,26 @@ class Glch
         GLFWwindow * win();
 
         // Define vertex shader and fragment shader
-        int addShader(const char * vsp, const char *fsp);
+        int addPro(const char * vsp, const char *fsp);
 
         // Use the shader program
-        void use(int index = 0);
-
-        // Create OpenGL object
-        void add( char * );
-
-        // Create OpenGL object 
-        void bindVAO(int , bool);
+        void usePro(int index = 0);
         
         // Return the id of shader program
         unsigned int id( int n = 0);
+
+        // Create OpenGL object
+        void addVAO( char * );
+
+        // Create OpenGL object 
+        void useVAO(int , bool);
         
+        // Add a object
+        void addObj(void (* draw)(), int , int);
+        friend void drawObj(Glch &);
+
+        // Start main loop
+        void startMainLoop();
     protected:
         // The window will be used
         GLFWwindow * _window;
@@ -49,8 +56,16 @@ class Glch
         int _width, _height;
         
         // window's title
-        char *_title;
+        char *_title = nullptr;
+
+        // Objects will be draw
+        object * _start = nullptr;
+        object * _end = nullptr;
+
+        // Thread will be used to draw
+        std::thread * mainLoop = nullptr;
 };
+
 
 #endif
 

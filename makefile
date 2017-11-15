@@ -1,5 +1,5 @@
 cc = clang++
-link = -lGL -ldl -lglfw
+link = -lGL -ldl -lglfw -lpthread
 config = -g -std=c++11
 
 game : build/main.o build/glch.o build/glad.o build/shader.o build/globject.o

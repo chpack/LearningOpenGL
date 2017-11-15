@@ -4,9 +4,9 @@ void processInput(GLFWwindow * window);
 
 int main()
 {
-    Glch glch( 400, 300, (char *) "First", 1);
-    glch.addShader("runtime/glsl/vs.glsl","runtime/glsl/fs.glsl");
-    glch.add((char *)"./runtime/data/point/tra.pnt");
+    Glch glch( 500, 500, (char *) "First", 1);
+    glch.addPro("runtime/glsl/vs.glsl","runtime/glsl/fs.glsl");
+    glch.addVAO((char *)"./runtime/data/point/tra.pnt");
 
     int vcl = glGetUniformLocation(glch.id(), "col");
 
@@ -24,9 +24,9 @@ int main()
         g += ag * 0.0035;
         b += ab * 0.005;
 
-        glch.use();
+        glch.usePro();
         glUniform3f( vcl, 1 - r, 1 - g,  1 - b);
-        glch.bindVAO(0, true);
+        glch.useVAO(0, true);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         glfwSwapBuffers( glch.win());
