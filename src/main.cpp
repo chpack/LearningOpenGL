@@ -4,7 +4,7 @@ void processInput(GLFWwindow * window);
 
 int main()
 {
-    Glch glch( 500, 500, (char *) "First", 1);
+    Glch glch( 500, 500, (char *) "First");
     glch.addPro("runtime/glsl/vs.glsl","runtime/glsl/fs.glsl");
     glch.addVAO((char *)"./runtime/data/point/tra.pnt");
 
@@ -27,7 +27,7 @@ int main()
         glch.usePro();
         glUniform3f( vcl, 1 - r, 1 - g,  1 - b);
         glch.useVAO(0, true);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 
         glfwSwapBuffers( glch.win());
         glfwPollEvents();

@@ -36,17 +36,6 @@ void glVAO::add( char * dataPath)
     float * data = new float[dataSize];
     for (int i = 0; i < dataSize; i ++)
         pot >> data[i];
-
-
-    /*
-    pot >>  _buffT[index] >>  _drawT[index] >> _pos[index] >> _part[index] 
-        >> _dataT[index] >> _norm[index] >> _step[index] >> _number[index];
-    data[index] = new float[_number[index]];
-    for (unsigned int i = 0; i < _number[index]; i ++)
-        pot >> data[index][i];
-    pot.close();
-    */
-
     // Very normaily function to create VBO and VAO
     glGenVertexArrays(1, &_vao[index]);
     glGenBuffers(1, &_vbo[index]);
@@ -54,8 +43,10 @@ void glVAO::add( char * dataPath)
     glBindBuffer(bufftype, _vbo[index]);
     glBufferData(bufftype, dataSize * sizeof(float), data, drawType);
     for (int i = 0; i < vaoNum; i ++)
+    {
         glVertexAttribPointer( pos[i], width[i], dataType[i], norm[i], step[i] * sizeof(float), (void*)(dealt[i] * sizeof(float)));
-    glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(i);
+    }
     glBindBuffer(bufftype, 0);
     glBindVertexArray(0);
 }
