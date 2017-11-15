@@ -1,3 +1,7 @@
 game
 build
 *.swp
+src/stb_image.c
+include/stb_image.h
+include/glm
+
