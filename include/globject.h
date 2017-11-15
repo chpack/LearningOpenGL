@@ -8,7 +8,7 @@
 class glVAO
 {
     public:
-        glVAO(int);
+        glVAO(int num = 8);
         ~glVAO();
         void add(char *);
         void bind(int, bool flag = true);
@@ -16,17 +16,9 @@ class glVAO
         unsigned int 
           * _vao, 
           * _vbo,
-          * _buffT,
-          * _drawT,
-          * _pos,
-          * _part,
-          * _dataT,
-          * _norm,
-          * _step,
-          * _number,
+          * _potNum,
             index,
             max;
-        float ** data;
 };
 
 struct object

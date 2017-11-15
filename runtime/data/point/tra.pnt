@@ -1,2 +1,8 @@
-34962 35044 0 3 5126 0 3 9
--1. -1 0.0 1 -1 0.0 0.0 1 0.0 
+34962 35044 9 3 1
+0 3 5126 0 3 0
+-1 -1 0
+1 -1 0
+1 1 0
+bufftype drawType dataSize pointNum vaoNum
+pos width dataType norm step dealt
+data

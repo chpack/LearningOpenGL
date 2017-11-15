@@ -26,6 +26,9 @@ class Glch
 
         // Use the shader program
         void usePro(int index = 0);
+
+        // Unif
+        int unif();
         
         // Return the id of shader program
         unsigned int id( int n = 0);

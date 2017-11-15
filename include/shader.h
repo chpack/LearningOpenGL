@@ -17,6 +17,9 @@ class Shader
         void use();
 
         unsigned int id();
+        void setBool(const std::string &name, bool value) const;
+        void setInt(const std::string &name, int value) const;
+        void setFloat(const std::string &name, float value) const;
     protected:
         unsigned int _ID;
 };
