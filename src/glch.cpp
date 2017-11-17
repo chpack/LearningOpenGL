@@ -37,6 +37,7 @@ Glch::Glch( int width, int height, std::string title, int objectNum, int texN)
     // Config view and sizecallback
     glViewport( 0, 0, _width, _height);
     glfwSetFramebufferSizeCallback(_window, fb_size_callback);
+    glEnable(GL_DEPTH_TEST);
 }
 
 // Deal with ending
