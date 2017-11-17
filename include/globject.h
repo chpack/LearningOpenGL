@@ -16,6 +16,7 @@ class glVAO
         unsigned int 
           * _vao, 
           * _vbo,
+          * _ebo,
           * _potNum,
             index,
             max;

@@ -8,6 +8,7 @@ glVAO::glVAO(int num)
 {
     _vao = new unsigned int [num];
     _vbo = new unsigned int [num];
+    _ebo = new unsigned int [num];
     index = 0;
     max = num;
 }
@@ -19,10 +20,12 @@ glVAO::~glVAO()
 void glVAO::add( char * dataPath)
 {
     std::fstream pot(dataPath, std::ios::in);
-    int bufftype, drawType, dataSize, pointNum, vaoNum;
+    int bufftype, drawType, elemType, dataSize, pointNum, vaoNum, eboNum;
     int *pos, *width, *dataType, *norm, *step, *dealt;
 
-    pot >> bufftype >> drawType >> dataSize >> pointNum >> vaoNum;
+    std::cout << GL_ELEMENT_ARRAY_BUFFER;
+
+    pot >> bufftype >> drawType >> elemType >> dataSize >> pointNum >> vaoNum >> eboNum;
     pos = new int[vaoNum];
     width = new int[vaoNum];
     dataType = new int[vaoNum];
@@ -36,12 +39,21 @@ void glVAO::add( char * dataPath)
     float * data = new float[dataSize];
     for (int i = 0; i < dataSize; i ++)
         pot >> data[i];
+
+    int * element = new int[eboNum];
+    for (int i = 0; i < eboNum; i ++)
+        pot >> element[i];
     // Very normaily function to create VBO and VAO
     glGenVertexArrays(1, &_vao[index]);
     glGenBuffers(1, &_vbo[index]);
+    glGenBuffers(1, &_ebo[index]);
+
     glBindVertexArray(_vao[index]);
     glBindBuffer(bufftype, _vbo[index]);
+    glBindBuffer(elemType, _ebo[index]);
+
     glBufferData(bufftype, dataSize * sizeof(float), data, drawType);
+    glBufferData(elemType, eboNum * sizeof(int), element, drawType);
     for (int i = 0; i < vaoNum; i ++)
     {
         glVertexAttribPointer( pos[i], width[i], dataType[i], norm[i], step[i] * sizeof(float), (void*)(dealt[i] * sizeof(float)));

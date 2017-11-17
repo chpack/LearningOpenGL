@@ -27,7 +27,8 @@ int main()
         glch.usePro();
         glUniform3f( vcl, 1 - r, 1 - g,  1 - b);
         glch.useVAO(0, true);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        //glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers( glch.win());
         glfwPollEvents();

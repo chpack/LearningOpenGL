@@ -1,12 +1,12 @@
-34962 35044 18 6 1
+34962 35044 34963 12 4 1 6
 0 3 5126 0 3 0
 -1 -1 0
  1 -1 0
  1  1 0
- 1  1 0
 -1  1 0
--1 -1 0
+0 1 2
+0 2 3
 
-bufftype drawType dataSize pointNum vaoNum
+bufftype drawType elemType dataSize pointNum vaoNum eboNum
 pos width dataType norm step dealt
 data
