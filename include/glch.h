@@ -31,7 +31,7 @@ class Glch
         void usePro(int index = 0);
 
         // Unif
-        int unif();
+        void  unif(std::string, int);
         
         // Return the id of shader program
         unsigned int id( int n = 0);

@@ -76,6 +76,13 @@ void Glch::usePro(int n )
     _shader[n].use();
 }
 
+void  Glch::unif(std::string name, int i)
+{
+    _shader[0].setInt(name, i);
+}
+
+    
+
 // Return shader program id
 unsigned int Glch::id(int n)
 {
