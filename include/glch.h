@@ -10,6 +10,7 @@
 #include <fstream>
 #include "shader.h"
 #include "globject.h"
+#include "stb_image.h"
 
 class Glch
 {
