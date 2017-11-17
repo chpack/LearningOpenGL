@@ -92,7 +92,7 @@ unsigned int Glch::id(int n)
 }
 
 // Window size changing call back
-void fb_size_callback(GLFWwindow * window, int width, int height)
+ void fb_size_callback(GLFWwindow * window, int width, int height)
 {
     glViewport(0, 0, width, height);
     window = nullptr;

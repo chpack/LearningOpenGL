@@ -51,6 +51,9 @@ class Glch
 
         // Start main loop
         void startMainLoop();
+
+        int width(){return _width;}
+        int height(){return _height;}
     protected:
         // The window will be used
         GLFWwindow * _window;
