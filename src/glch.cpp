@@ -5,9 +5,11 @@
 
 void fb_size_callback(GLFWwindow * window, int width, int height);
 
-Glch::Glch( int width, int height, std::string title, int objectNum):vao(objectNum)
-        ,_width(width), _height(height), _title(title)
+Glch::Glch( int width, int height, std::string title, int objectNum, int texN)
+    :vao(objectNum), texture(texN), _title(title)
 {
+    _width = width;
+    _height = height;
     _start = nullptr;
     _end = nullptr;
     mainLoop = nullptr;
@@ -107,6 +109,16 @@ void Glch::useVAO(int index, bool flag)
 {
     vao.bind(index,flag);
 }
+
+void Glch::addTex(std::string path)
+{
+    texture.addTex(path);
+}
+void Glch::useTex( int i, int j)
+{
+    texture.useTex(i,j);
+}
+
 
 void Glch::addObj(void (* draw)(), int prgIndex, int vaoIndex)
 {

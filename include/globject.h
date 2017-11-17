@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <glad/glad.h>
+#include "stb_image.h"
 
 // Buffer data for VBO and VAO
 class glVAO
@@ -20,6 +21,18 @@ class glVAO
           * _potNum,
             index,
             max;
+};
+
+class tex
+{
+    public:
+        tex(int);
+        ~tex();
+        void addTex(std::string);
+        void useTex(int, int);
+    protected:
+        int index;
+        unsigned int *texture;
 };
 
 struct object

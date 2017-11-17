@@ -78,4 +78,41 @@ void glVAO::bind(int index, bool flag)
     else
         glBindVertexArray(0);
 }
+
+tex::tex(int num)
+{
+    index = 0;
+    texture = new unsigned int[num];
+    stbi_set_flip_vertically_on_load(true);
+}
+
+tex::~tex()
+{
+    delete[] texture;
+}
+
+void tex::addTex(std::string path)
+{
+    unsigned char * data;
+    int width, height, color;
+    data = stbi_load(path.c_str(), &width, &height, &color, 0);
+
+    glGenTextures(1, &(texture[index]));
+    glActiveTexture(GL_TEXTURE0 + index);
+    glBindTexture(GL_TEXTURE_2D, texture[index]);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    stbi_image_free(data);
+    index++;
+}
+
+void tex::useTex(int i, int j)
+{
+    glActiveTexture(GL_TEXTURE0 + j);
+    glBindTexture(GL_TEXTURE_2D, texture[i]);
+}
 #endif

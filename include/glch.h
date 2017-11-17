@@ -16,7 +16,7 @@ class Glch
 {
     public:
         // Init for glfw and create a window 
-        Glch( int width = 1280, int height=720, std::string title = (char *) "text", int objectNum = 1);
+        Glch( int width = 1280, int height=720, std::string title = "text", int objectNum = 1, int texN = 4);
 
         // Dectroy anything
         ~Glch();
@@ -41,6 +41,9 @@ class Glch
 
         // Create OpenGL object 
         void useVAO(int , bool);
+
+        void addTex(std::string);
+        void useTex(int , int);
         
         // Add a object
         void addObj(void (* draw)(), int , int);
@@ -57,6 +60,7 @@ class Glch
         
         // The opengl object
         glVAO vao;
+        tex texture;
         
         // Width and heighe of window
         int _width, _height;
