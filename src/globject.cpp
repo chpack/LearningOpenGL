@@ -15,16 +15,21 @@ glVAO::glVAO(int num)
 
 glVAO::~glVAO()
 {
+    for (unsigned int i = 0; i < max; i ++)
+    {
+        delete[] _vao;
+        delete[] _vbo;
+        delete[] _ebo;
+    }
 }
 
-void glVAO::add( char * dataPath)
+void glVAO::add( std::string dataPath)
 {
     std::fstream pot(dataPath, std::ios::in);
     int bufftype, drawType, elemType, dataSize, pointNum, vaoNum, eboNum;
     int *pos, *width, *dataType, *norm, *step, *dealt;
 
-    std::cout << GL_ELEMENT_ARRAY_BUFFER;
-
+    // Read data from file
     pot >> bufftype >> drawType >> elemType >> dataSize >> pointNum >> vaoNum >> eboNum;
     pos = new int[vaoNum];
     width = new int[vaoNum];
@@ -43,6 +48,8 @@ void glVAO::add( char * dataPath)
     int * element = new int[eboNum];
     for (int i = 0; i < eboNum; i ++)
         pot >> element[i];
+    pot.close();
+
     // Very normaily function to create VBO and VAO
     glGenVertexArrays(1, &_vao[index]);
     glGenBuffers(1, &_vbo[index]);

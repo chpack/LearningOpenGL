@@ -2,15 +2,12 @@
 #define GLCH_CPP
 
 #include "../include/glch.h"
-#include <fstream>
 
 void fb_size_callback(GLFWwindow * window, int width, int height);
 
-Glch::Glch( int width, int height, char * title, int objectNum):vao(objectNum)
+Glch::Glch( int width, int height, std::string title, int objectNum):vao(objectNum)
+        ,_width(width), _height(height), _title(title)
 {
-    _width = width;
-    _height = height;
-    _title = title;
     _start = nullptr;
     _end = nullptr;
     mainLoop = nullptr;
@@ -20,7 +17,7 @@ Glch::Glch( int width, int height, char * title, int objectNum):vao(objectNum)
     glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     // Create a window
-    _window = glfwCreateWindow( _width,_height, _title, nullptr, nullptr);
+    _window = glfwCreateWindow( _width,_height, _title.c_str(), nullptr, nullptr);
     if (_window == nullptr)
     {
         std::cout << "failed to create window " << std::endl;
@@ -93,7 +90,7 @@ void fb_size_callback(GLFWwindow * window, int width, int height)
 }
 
 // Create OpenGL object
-void Glch::addVAO( char * dataPath)
+void Glch::addVAO( std::string dataPath)
 {
     vao.add(dataPath);
 }

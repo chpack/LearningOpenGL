@@ -10,7 +10,7 @@ class glVAO
     public:
         glVAO(int num = 8);
         ~glVAO();
-        void add(char *);
+        void add(std::string);
         void bind(int, bool flag = true);
     protected:
         unsigned int 

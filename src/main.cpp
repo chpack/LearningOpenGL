@@ -4,9 +4,9 @@ void processInput(GLFWwindow * window);
 
 int main()
 {
-    Glch glch( 500, 500, (char *) "First");
+    Glch glch( 500, 500,  "First");
     glch.addPro("runtime/glsl/vs.glsl","runtime/glsl/fs.glsl");
-    glch.addVAO((char *)"./runtime/data/point/tra.pnt");
+    glch.addVAO("./runtime/data/point/tra.pnt");
 
     int vcl = glGetUniformLocation(glch.id(), "col");
 

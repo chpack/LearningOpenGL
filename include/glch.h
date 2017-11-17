@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <string>
+#include <fstream>
 #include "shader.h"
 #include "globject.h"
 
@@ -13,7 +15,7 @@ class Glch
 {
     public:
         // Init for glfw and create a window 
-        Glch( int width = 1280, int height=720, char * title = (char *) "text", int objectNum = 1);
+        Glch( int width = 1280, int height=720, std::string title = (char *) "text", int objectNum = 1);
 
         // Dectroy anything
         ~Glch();
@@ -34,7 +36,7 @@ class Glch
         unsigned int id( int n = 0);
 
         // Create OpenGL object
-        void addVAO( char * );
+        void addVAO( std::string );
 
         // Create OpenGL object 
         void useVAO(int , bool);
@@ -59,7 +61,7 @@ class Glch
         int _width, _height;
         
         // window's title
-        char *_title = nullptr;
+        std::string _title;
 
         // Objects will be draw
         object * _start = nullptr;
