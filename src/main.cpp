@@ -10,26 +10,23 @@ int main()
     glch.addTex("runtime/res/wall.jpg");
     glch.addTex("runtime/res/smell.jpg");
 
-    int vcl = glGetUniformLocation(glch.id(), "col");
 
-    float r = 1.0, g=1.0, b=1.0;
-    int ar = 1, ab = 1, ag = 1;
+    unsigned int tfl = glGetUniformLocation(glch.id(), "transform");
     while(!glfwWindowShouldClose( glch.win()))
     {
         processInput(glch.win());
-        glClearColor(r,g,b,1.0f);
+        glClearColor(0.5,0.3,0.7,1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        ar = r < 1.0f && r > 0.0f ? ar : -ar;
-        ag = g < 1.0f && g > 0.0f ? ag : -ag;
-        ab = b < 1.0f && b > 0.0f ? ab : -ab;
-        r += ar * 0.002;
-        g += ag * 0.0035;
-        b += ab * 0.005;
+
+        glm::mat4 trans;
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0,0.0,1.0));
+        trans = glm::translate(trans, glm::vec3(0.5, -0.5, 0.0));
+        trans = glm::scale(trans, glm::vec3(0.5,0.5,0.5));
 
         glch.usePro();
         glch.unif("tex", 0);
         glch.unif("tex2", 1);
-        glUniform3f( vcl, 1 - r, 1 - g,  1 - b);
+        glUniformMatrix4fv(tfl, 1, GL_FALSE, glm::value_ptr(trans));
         glch.useVAO(0, true);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
