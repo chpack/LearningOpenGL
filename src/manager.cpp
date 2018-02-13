@@ -22,6 +22,9 @@ manager::manager(int width, int height, std::string title)
 manager::~manager()
 {
     glfwTerminate();
+    for (globj *obj : objects)
+        obj->~globj();
+
 }
 
 void manager::loop()
@@ -30,7 +33,16 @@ void manager::loop()
 }
 
 void manager::addPro(std::string vc, std::string fc)
-// manager::addPro(std::string vsc, std::string fsc)
 {
     programs.push_back(shader(vc, fc));
+}
+
+void manager::addObj(std::string configPath, std::string verticesPath, std::string indicesPath)
+{
+    objects.push_back(new globj(configPath, verticesPath, indicesPath));
+}
+
+void manager::drawObj(int i)
+{
+    objects[i]->draw();
 }

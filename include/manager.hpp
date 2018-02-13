@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "shader.hpp"
+#include "globj.hpp"
 
 class manager 
 {
@@ -20,6 +21,11 @@ class manager
       void addPro(std::string vc, std::string sc);
 
       GLFWwindow *window;
+
+      std::vector<globj *> objects;
+
+      void addObj(std::string configPath, std::string verticesPath, std::string indicesPath);
+      void drawObj(int i);
 };
 
 #endif
