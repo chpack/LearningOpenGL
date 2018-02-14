@@ -26,7 +26,8 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         // draw our first triangle
-        wmgr.programs[0].use();
+        // wmgr.programs[0].use();
+        wmgr.usePro(0);
 
         wmgr.drawObj(0);
 

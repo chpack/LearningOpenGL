@@ -37,6 +37,11 @@ void manager::addPro(std::string vc, std::string fc)
     programs.push_back(shader(vc, fc));
 }
 
+void manager::usePro(int i)
+{
+    programs[i].use();
+}
+
 void manager::addObj(std::string configPath, std::string verticesPath, std::string indicesPath)
 {
     objects.push_back(new globj(configPath, verticesPath, indicesPath));

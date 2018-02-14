@@ -23,5 +23,4 @@ class globj
 
         ~globj();
 };
-#define dbj(x) std::cout << x << '\t' << __FILE__ << ':' << __LINE__ << std::endl;
 #endif

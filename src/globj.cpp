@@ -25,9 +25,6 @@ globj::globj(std::string configPath, std::string verticesPath, std::string indic
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
-    dbj(VAO)
-    dbj(VBO)
-    dbj(EBO)
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(VAO);
 
