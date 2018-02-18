@@ -53,6 +53,12 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "chrono": "cpp",
+        "ctime": "cpp",
+        "memory": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp",
+        "tuple": "cpp"
     } // 效果稍好，但太卡，故关掉
 }
