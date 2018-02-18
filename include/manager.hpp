@@ -30,6 +30,7 @@ class manager
 
       void addPro(std::string vc, std::string sc);
       void usePro(int i);
+      void setUniformMat4(int i, std::string name, glm::mat4 value);
 
       void addObj(std::string configPath, std::string verticesPath, std::string indicesPath);
       void drawObj(int i);

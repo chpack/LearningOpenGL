@@ -1,7 +1,7 @@
 #include "../include/manager.hpp"
 
-const unsigned int SCREEN_W = 800;
-const unsigned int SCREEN_H = 600;
+int SCREEN_W = 800;
+int SCREEN_H = 600;
 
 void processInput(GLFWwindow *window)
 {
@@ -9,12 +9,20 @@ void processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 }
 
+void windowSize(GLFWwindow *win, int w, int h)
+{
+    SCREEN_W = w;
+    SCREEN_H = h;
+    glViewport(0, 0, w, h);
+}
 
 int main()
 {
     manager wmgr(SCREEN_W, SCREEN_H, "LG");
     wmgr.addPro("data/shader/vc.glsl", "data/shader/fc.glsl");
     wmgr.addObj("data/points/configure.conf", "data/points/vertices.pnt", "data/points/indices");
+
+    glfwSetWindowSizeCallback(wmgr.window, windowSize);
 
     float i = 0.0f;
     while (!glfwWindowShouldClose(wmgr.window))
@@ -26,17 +34,29 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // draw our first triangle
-        // wmgr.programs[0].use();
-        glm::mat4 trans;
-        // trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
-        trans = glm::rotate(trans, glm::radians(i), glm::vec3(0.0f, 0.0f, 1.0f));
-        i += 1;
-        // trans = glm::scale(trans, glm::vec3(0.5, 0.5f, 0.5));
-
-        unsigned int tfl = glGetUniformLocation(wmgr.programs[0].ID, "transform");
-        glUniformMatrix4fv(tfl, 1, GL_FALSE, glm::value_ptr(trans));
+        glm::vec3 camera = glm::vec3(2.0f, 2.0f, 3.0f);
+        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+        glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::mat4 view = glm::lookAt(camera, center, up);
         wmgr.usePro(0);
+        // glm::mat4 view = translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -3.0));
+        glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)SCREEN_W / (float)SCREEN_H, 0.1f, 100.0f);
+        glm::mat4 model = glm::rotate(glm::mat4(), glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+
+        // draw our first triangle
+        // trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
+        // trans = glm::rotate(trans, glm::radians(i), glm::vec3(0.0f, 0.0f, 1.0f));
+        // trans = glm::scale(trans, glm::vec3(0.5, 0.5f, 0.5));
+        // unsigned int viewi = glGetUniformLocation(wmgr.programs[0].ID, "transform"); // unsigned int modeli = glGetUniformLocation(wmgr.programs[0].ID, "transform");
+        // unsigned int proji = glGetUniformLocation(wmgr.programs[0].ID, "transform");
+
+        // glUniformMatrix4fv(viewi, 1, GL_FALSE, glm::value_ptr(view));
+        // glUniformMatrix4fv(modeli, 1, GL_FALSE, glm::value_ptr(model));
+        // glUniformMatrix4fv(proji, 1, GL_FALSE, glm::value_ptr(proj));
+        wmgr.setUniformMat4(0, "view", view);
+        wmgr.setUniformMat4(0, "model", model);
+        wmgr.setUniformMat4(0, "proj", proj);
 
         wmgr.drawObj(0);
 

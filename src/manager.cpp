@@ -42,6 +42,10 @@ void manager::usePro(int i)
     programs[i].use();
 }
 
+void manager::setUniformMat4(int i, std::string name, glm::mat4 value)
+{
+    programs[i].setMat4f(name, value);
+}
 void manager::addObj(std::string configPath, std::string verticesPath, std::string indicesPath)
 {
     objects.push_back(new globj(configPath, verticesPath, indicesPath));
