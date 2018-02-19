@@ -3,10 +3,25 @@
 int SCREEN_W = 800;
 int SCREEN_H = 600;
 
+double x = 1, y = 1;
 void processInput(GLFWwindow *window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+    static double lx = -1, ly = -1;
+    double thisx, thisy;
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2))
+    {
+        if (lx > 0)
+        {
+            glfwGetCursorPos(window, &thisx, &thisy);
+            x += (lx - thisx) / 500;
+            y += (ly - thisy) / 500;
+        }
+        glfwGetCursorPos(window, &lx, &ly);
+    } else {
+        lx = -1;
+    }
 }
 
 void windowSize(GLFWwindow *win, int w, int h)
@@ -34,7 +49,8 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glm::vec3 camera = glm::vec3(2.0f, 2.0f, 3.0f);
+
+        glm::vec3 camera = glm::vec3(glm::sin(x), glm::cos(x), y);
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
         glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::mat4 view = glm::lookAt(camera, center, up);
@@ -42,7 +58,6 @@ int main()
         // glm::mat4 view = translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -3.0));
         glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)SCREEN_W / (float)SCREEN_H, 0.1f, 100.0f);
         glm::mat4 model = glm::rotate(glm::mat4(), glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-
 
         // draw our first triangle
         // trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
