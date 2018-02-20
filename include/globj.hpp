@@ -6,12 +6,14 @@
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
 #include <iostream>
+#include <stb_image.h>
 
 
 class globj
 {
     public:
-        unsigned int VBO, VAO, EBO, attrNum, step;
+        unsigned int VBO, VAO, EBO, tex, attrNum, step;
+        int width, height, nrCh;
         unsigned int vboType, drawType, eboType, dataType, drawShape, indexType, dataIndex, dataSize, normalize, indexSize, stepSize;
 
         float *data;
