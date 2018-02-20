@@ -11,14 +11,20 @@ globj::globj(std::string configPath, std::string verticesPath, std::string indic
     verticesFile.open(verticesPath);
     indexFile.open(indicesPath);
 
-    confFile >> std::hex >> vboType >> drawType >> eboType >> dataType >> normalize >> drawShape >> indexType >>
-                std::dec >> dataIndex >> stepSize >> dataSize >> indexSize;
-
+    confFile >> std::hex >> vboType >> drawType >> eboType >> dataType >> normalize >> drawShape >> indexType >> std::dec >> step >> dataSize >> indexSize >> attrNum;
+    // std::dec >> dataIndex >> stepSize >> dataSize >> indexSize;
     data = new float[dataSize];
-    for (int i = 0; i < dataSize; i++)
-        verticesFile >> data[i];
-
     index = new int[indexSize];
+    aLocation = new int[attrNum];
+    aSize = new int[attrNum];
+    aOffset = new int[attrNum];
+
+    for (int i = 0; i < attrNum; i++)
+        confFile >> aLocation[i] >> aSize[i] >> aOffset[i];
+
+    for (int i = 0; i < dataSize; i++)
+            verticesFile >> data[i];
+
     for (int i = 0; i < indexSize; i++)
         indexFile >> index[i];
 
@@ -34,8 +40,11 @@ globj::globj(std::string configPath, std::string verticesPath, std::string indic
     glBindBuffer(eboType, EBO);
     glBufferData(eboType, indexSize * sizeof(int), index, drawType);
 
-    glVertexAttribPointer(dataIndex, stepSize, dataType, normalize, stepSize * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+    for (int i = 0; i < attrNum; i++)
+    {
+        glVertexAttribPointer(aLocation[i], aSize[i], dataType, normalize, step * sizeof(float), (void *)(aOffset[i]* sizeof(float)));
+        glEnableVertexAttribArray(i);
+    }
 
     glBindBuffer(vboType, 0);
     glBindVertexArray(0); 

@@ -11,11 +11,14 @@
 class globj
 {
     public:
-        unsigned int VBO, VAO, EBO;
+        unsigned int VBO, VAO, EBO, attrNum, step;
         unsigned int vboType, drawType, eboType, dataType, drawShape, indexType, dataIndex, dataSize, normalize, indexSize, stepSize;
 
         float *data;
         int *index;
+        int *aLocation;
+        int *aSize;
+        int *aOffset;
 
         globj(std::string configPath, std::string verticesPath, std::string indicesPath);
 

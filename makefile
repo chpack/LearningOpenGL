@@ -1,6 +1,6 @@
 # cc = clang++
 cc = g++
-link = -lglad -lglfw3dll
+link = -lglad -lglfw3dll -lstb_image
 config = -g -std=c++11
 
 runtime/game : build/main.o  build/manager.o build/globj.o

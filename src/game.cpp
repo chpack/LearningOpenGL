@@ -16,7 +16,7 @@ void processInput(GLFWwindow *window)
         {
             glfwGetCursorPos(window, &thisx, &thisy);
             x += (lx - thisx) / 500;
-            y += (ly - thisy) / 500;
+            y -= (ly - thisy) / 500;
         }
         glfwGetCursorPos(window, &lx, &ly);
     } else {
@@ -39,6 +39,22 @@ int main()
 
     glfwSetWindowSizeCallback(wmgr.window, windowSize);
 
+    int texW, texH, nrCh;
+    unsigned char *data = stbi_load("data/texture/wood.jpg", &texW, &texH, &nrCh, 0);
+
+    unsigned int tex;
+    glGenTextures(1, &tex);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texW, texH, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    stbi_image_free(data);
+
     float i = 0.0f;
     while (!glfwWindowShouldClose(wmgr.window))
     {
@@ -49,8 +65,7 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-
-        glm::vec3 camera = glm::vec3(glm::sin(x), glm::cos(x), y);
+        glm::vec3 camera = glm::normalize(glm::vec3(glm::sin(x), y, glm::cos(x)));
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
         glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::mat4 view = glm::lookAt(camera, center, up);
@@ -69,6 +84,7 @@ int main()
         // glUniformMatrix4fv(viewi, 1, GL_FALSE, glm::value_ptr(view));
         // glUniformMatrix4fv(modeli, 1, GL_FALSE, glm::value_ptr(model));
         // glUniformMatrix4fv(proji, 1, GL_FALSE, glm::value_ptr(proj));
+
         wmgr.setUniformMat4(0, "view", view);
         wmgr.setUniformMat4(0, "model", model);
         wmgr.setUniformMat4(0, "proj", proj);
