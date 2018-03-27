@@ -1,10 +1,10 @@
 # cc = clang++
 cc = g++
-link = -lglad -lglfw3dll -lstb_image
+link = -ldl -lglad -lglfw -lstb_image
 config = -g -std=c++11
 
-runtime/game : build/main.o  build/manager.o build/globj.o
-	$(cc) $(config) build/main.o build/manager.o build/globj.o -o runtime/game.exe $(link)
+game : build/main.o  build/manager.o build/globj.o
+	$(cc) $(config) build/main.o build/manager.o build/globj.o -o game $(link)
 
 build/main.o : src/game.cpp
 	$(cc) $(config) -c src/game.cpp -o build/main.o
@@ -22,4 +22,5 @@ clean:
 
 .PHONY : run
 run: game
-	runtime/game.exe
+	./game
+

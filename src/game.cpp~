@@ -71,6 +71,7 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
+        glViewport(0,0,SCREEN_W, SCREEN_H);
 
 //        glm::vec3 camera = glm::normalize(glm::vec3(glm::sin(1), y, glm::cos(1))) ;
 //        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);

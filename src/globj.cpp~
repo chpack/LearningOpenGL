@@ -55,7 +55,7 @@ globj::globj(std::string configPath, std::string verticesPath, std::string indic
     confFile >> textureName;
     textureDir += textureName;
     unsigned char *data = stbi_load(textureDir.c_str() , &width, &height, &nrCh, 0);
-    std::cout << textureName << "----" << textureDir  << std::endl;
+    std::cout << textureName << "----" << std::cout << textureDir  << std::endl;
 
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_2D, tex);
