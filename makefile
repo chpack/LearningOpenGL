@@ -1,5 +1,5 @@
 # cc = clang++
-cc = g++
+cc = clang++
 link = -ldl -lglad -lglfw -lstb_image
 config = -g -std=c++11
 

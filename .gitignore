@@ -2,3 +2,5 @@ game
 build
 *.swp
 runtime/game.exe
+.
+*~
