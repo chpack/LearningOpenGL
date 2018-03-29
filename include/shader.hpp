@@ -53,8 +53,8 @@ public:
         const char * fShaderCode = fragmentCode.c_str();
         // 2. compile shaders
         unsigned int vertex, fragment;
-        int success;
-        char infoLog[512];
+        //int success;
+        //char infoLog[512];
         // vertex shader
         vertex = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertex, 1, &vShaderCode, NULL);
@@ -100,11 +100,6 @@ public:
     // ------------------------------------------------------------------------
     void setMat4f(std::string name, glm::mat4 value) 
     { 
-        std::cout << name;
-        for (int l = 0; l < 4; l ++)
-            for (int k = 0; k < 4; k ++)
-                std::cout << value[l][k];
-        std::cout << std::endl;
         glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
     }
 

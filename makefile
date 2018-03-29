@@ -3,10 +3,10 @@ cc = clang++
 link = -ldl -lglad -lglfw -lstb_image
 config = -g -std=c++11
 
-game : build/main.o  build/manager.o build/globj.o
-	$(cc) $(config) build/main.o build/manager.o build/globj.o -o game $(link)
+game : build/main.o  build/manager.o build/globj.o include/shader.hpp build/camera.o
+	$(cc) $(config) build/camera.o build/main.o build/manager.o build/globj.o -o game $(link)
 
-build/main.o : src/game.cpp
+build/main.o : src/game.cpp include/shader.hpp
 	$(cc) $(config) -c src/game.cpp -o build/main.o
 
 build/manager.o : src/manager.cpp include/manager.hpp
@@ -14,6 +14,9 @@ build/manager.o : src/manager.cpp include/manager.hpp
 
 build/globj.o : src/globj.cpp include/globj.hpp
 	$(cc) $(config) -c src/globj.cpp -o build/globj.o
+
+build/camera.o : src/camera.cpp include/camera.hpp
+	$(cc) $(config) -c src/camera.cpp -o build/camera.o
 
 .PHONY : clean
 clean:

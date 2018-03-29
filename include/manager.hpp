@@ -13,6 +13,7 @@
 
 #include "shader.hpp"
 #include "globj.hpp"
+#include "camera.hpp"
 
 // Debug tool
 #define dbj(x) std::cout << x << '\t' << __FILE__ << ':' << __LINE__ << std::endl;

@@ -22,13 +22,13 @@ globj::globj(std::string configPath, std::string verticesPath, std::string indic
     aSize = new int[attrNum];
     aOffset = new int[attrNum];
 
-    for (int i = 0; i < attrNum; i++)
+    for (unsigned int i = 0; i < attrNum; i++)
         confFile >> aLocation[i] >> aSize[i] >> aOffset[i];
 
-    for (int i = 0; i < dataSize; i++)
+    for (unsigned int i = 0; i < dataSize; i++)
             verticesFile >> data[i];
 
-    for (int i = 0; i < indexSize; i++)
+    for (unsigned int i = 0; i < indexSize; i++)
         indexFile >> index[i];
 
     glGenVertexArrays(1, &VAO);
@@ -43,7 +43,7 @@ globj::globj(std::string configPath, std::string verticesPath, std::string indic
     glBindBuffer(eboType, EBO);
     glBufferData(eboType, indexSize * sizeof(int), index, drawType);
 
-    for (int i = 0; i < attrNum; i++)
+    for (unsigned int i = 0; i < attrNum; i++)
     {
         glVertexAttribPointer(aLocation[i], aSize[i], dataType, normalize, step * sizeof(float), (void *)(aOffset[i]* sizeof(float)));
         glEnableVertexAttribArray(i);
