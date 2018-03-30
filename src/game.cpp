@@ -9,12 +9,21 @@ float dis = 3;
 float px = 0, py = 0, pz = 0;
 float speed = 0.10;
 
+int keys[GLFW_KEY_LAST] = {0};
+
 Camera cam(glm::vec3(0.0f, 0.0f, 0.0f), 0, 0, dis);
 
 glm::vec3 up(0.0f, 0.0f, 1.0f);
 
+void keycb(GLFWwindow*, int key, int , int action, int )
+{
+    keys[key] = action == GLFW_RELEASE ? 0 : keys[key];
+    keys[key] = action == GLFW_PRESS ? 1 : keys[key];
+}
+
 void processInput(GLFWwindow *window)
 {
+
     static double last = 0;
     double now = glfwGetTime();
     double d = (now - last) * 5;
@@ -27,34 +36,17 @@ void processInput(GLFWwindow *window)
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2))
     {
-        if (lx > 0)
-        {
-            glfwGetCursorPos(window, &thisx, &thisy);
-            x += (lx - thisx) / 500;
-            z -= (ly - thisy) / 500;
-            z = z >  1.5f ?  1.5f : z;
-            z = z < -1.5f ? -1.5f : z;
-            cam.contrald(x, z);
-        }
+        glfwGetCursorPos(window, &thisx, &thisy);
+        cam.contral((lx - thisx) / 500,-(ly - thisy) / 500, d*20);
         glfwGetCursorPos(window, &lx, &ly);
-    } else {
-        lx = -1;
     }
-    if (glfwGetKey(window, GLFW_KEY_W))
-        px -= speed * d;
-    if (glfwGetKey(window, GLFW_KEY_S))
-        px += speed * d;
-    if (glfwGetKey(window, GLFW_KEY_A))
-        py -= speed * d;
-    if (glfwGetKey(window, GLFW_KEY_D))
-        py += speed * d;
-    cam.move(px, py);
+
+    glfwGetCursorPos(window, &lx, &ly);
+    cam.move(keys[GLFW_KEY_W] - keys[GLFW_KEY_S], keys[GLFW_KEY_A] - keys[GLFW_KEY_D], d);
 }
 
-void scb(GLFWwindow *window, double xof, double yof)
+void scb(GLFWwindow *, double, double yof)
 {
-    window = nullptr;
-    xof = 0;
     dis -= yof * 0.2f;
 }
 
@@ -74,6 +66,7 @@ int main()
 
     glfwSetWindowSizeCallback(wmgr.window, windowSize);
     glfwSetScrollCallback(wmgr.window, scb);
+    glfwSetKeyCallback(wmgr.window, keycb);
 
 
     while (!glfwWindowShouldClose(wmgr.window))

@@ -12,12 +12,11 @@ Camera::Camera(glm::vec3 pos, float angx, float angy, float dis)
 
 void Camera::move(float dx, float dy, float speed)
 {
-    glm::vec3 direct = camera;
+    glm::vec3 direct = -camera;
     direct.z = 0;
-    direct = glm::normalize(direct) + glm::vec3(dx, dy, 0) * speed;
-    target = target + direct;
-
-    target = glm::vec3(dx, dy, 0.0f);
+    glm::vec3 left = glm::normalize(glm::cross(up, direct));
+    direct = glm::normalize(direct);
+    target = target + direct * dx * speed + left * dy * speed;
 }
 
 void Camera::contral(float left, float right, float speed)
@@ -27,7 +26,7 @@ void Camera::contral(float left, float right, float speed)
     angy = angy >  1.5f ?  1.5f : angy;
     angy = angy < -1.5f ? -1.5f : angy;
 
-    camera = glm::normalize( glm::vec3( glm::cos(angx), glm::sin(angx), glm::sin(angy))) * dis;
+    camera = glm::normalize( glm::vec3( glm::cos(angx), glm::sin(angx), glm::tan(angy))) * dis;
 }
 
 void Camera::contrald(float left, float right)
